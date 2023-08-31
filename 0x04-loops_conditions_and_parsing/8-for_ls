@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Displays contents of the current directory in list format
+# where only the part of the name after the first dash is displayed
+dash="-"
+for file in *
+do
+	filename=$(basename "$file")
+	last_part=$(echo "$filename" | cut -d "$dash" -f 2-)
+	echo "$last_part"
+done
