@@ -11,11 +11,9 @@ echo $$ > $pid_file
 
 
 handle_term() {
-	if [[ $1 -eq 15 ]]
-	then
-		echo "I hate the kill command"
-		exit 0
-	fi
+	echo "I hate the kill command"
+	rm "$pid_file"
+	exit 1
 }
 
 trap 'handle_term' TERM
@@ -32,7 +30,7 @@ handle_term_quit() {
 	exit 0
 }
 
-trap 'handle_term_quit' QUIT TERM
+trap 'handle_term_quit' QUIT
 
 while true
 do
