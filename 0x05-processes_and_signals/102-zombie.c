@@ -24,6 +24,7 @@ int main(void)
 			exit(0);
 		}
 	}
+	sleep(10);
 	return (0);
 }
 /**
