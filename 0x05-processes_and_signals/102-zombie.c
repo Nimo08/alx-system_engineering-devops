@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <sys/types.h>
+int infinite_while(void);
 /**
  * main -entry point
  * Return: 0
@@ -16,7 +17,7 @@ int main(void)
 		child = fork();
 		if (child > 0)
 		{
-			sleep(5);
+			sleep(1);
 			printf("Zombie process created, PID: %d\n", child);
 		}
 		else
@@ -24,6 +25,7 @@ int main(void)
 			exit(0);
 		}
 	}
+	infinite_while();
 	sleep(10);
 	return (0);
 }
