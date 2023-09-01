@@ -2,22 +2,30 @@
 # Manages manage_my_process
 process_name="manage_my_process"
 pid_file="/var/run/my_process.pid"
+
 start() {
-	echo "$!" > "$pid_file"
-	echo "manage_my_process started"
+	if [ ! -f "$pid_file" ]
+	then
+		./manage_my_process &
+		echo "$!" > "$pid_file"
+		echo "$process_name started"
+	fi
 }
 
 stop() {
 	pid=$(cat "$pid_file")
-	killall "$process_name"
+	kill "$pid"
 	rm "$pid_file"
-	echo "manage_my_process stopped"
+	echo "$process_name stopped"
 }
 
 restart() {
-	stop
+	if [ -f "$pid_file" ]
+	then
+		stop
+	fi
 	start
-	echo "manage_my_process restarted"
+	echo "$process_name restarted"
 }
 
 case "$1" in
