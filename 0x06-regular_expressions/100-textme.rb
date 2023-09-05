@@ -5,4 +5,5 @@ sender_match = log.match(/\[from:(.*?)\]/)
 receiver_match = log.match(/\[to:(.*?)\]/)
 flags_match = log.match(/\[flags:(.*?)\]/)
 
-print sender_match[1] + ", " + receiver_match[1] + ", " + flags_match[1] + "\n"
+res = "#{sender_match[1]}, #{receiver_match[1]}, #{flags_match[1]}"
+puts res
