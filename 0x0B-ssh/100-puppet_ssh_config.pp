@@ -3,6 +3,6 @@ augeas { 'ssh_config':
   context => '/files/etc/ssh/ssh_config',
   changes => [
     'set PasswordAuthentication no',
-    'set IdentityFile /home/nimo/.ssh/school',
+    'set IdentityFile .ssh/school',
   ],
 }
