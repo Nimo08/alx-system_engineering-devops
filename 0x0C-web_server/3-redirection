@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Configure your Nginx server so that /redirect_me
+# is redirecting to another page.
+redirect_301="\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;"
+apt-get update
+apt-get install -y nginx
+echo "Hello World!" > /var/www/html/index.html
+sed -i "30i $redirect_301" /etc/nginx/sites-available/default
+service nginx restart
