@@ -1,28 +1,21 @@
 # Install and configure an Nginx server using Puppet
-include nginx
-file { '/etc/nginx/sites-available/redirect_me':
-  ensure => file,
+package { 'nginx':
+  ensure => 'installed',
 }
-nginx::resource::server { 'default':
-  ensure             => present,
-  spdy               => 'off',
-  http2              => 'off',
-  proxy_read_timeout => '60s',
-  proxy_send_timeout => '60s',
-  proxy_set_header   => [],
-  proxy_hide_header  => [],
-  proxy_pass_header  => [],
-  owner              => 'www-data',
-  group              => 'www-data',
-  mode               => '0644',
+
+file_line { 'install':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'listen 80 default_server',
+  line   => 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
 }
-nginx::resource::location { 'index.html':
-  ensure   => present,
-  location => '/',
-  content  => 'Hello World!',
+
+# add Hello World! to index.html
+file { '/var/www/html/index.html':
+  content => 'Hello World!',
 }
-nginx::resource::location { 'redirect_me':
-  location => '^/redirect_me$',
-  rewrite  => 'https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;',
-  require  => File['/etc/nginx/sites-available/redirect_me'],
+
+service { 'nginx':
+  ensure  => 'running',
+  require => Package[nginx],
 }
