@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Get Apache to run on the container and to return
 # a page containing Hello Holberton when querying the root of it
-echo "Hello Holberton" > index.html
-docker cp index.html priceless_goodall:/var/www/html/index.html
-rm index.html
+echo "ServerName localhost" > /etc/apache2.conf
+service apache2 start
