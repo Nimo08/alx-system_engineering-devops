@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# Get Apache to run on the container and to return
+# a page containing Hello Holberton when querying the root of it
+docker exec -it priceless_goodall /bin/bash
+echo "Hello Holberton" > /var/www/html/index.html
+exit 
