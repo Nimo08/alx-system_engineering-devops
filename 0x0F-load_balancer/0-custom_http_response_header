@@ -3,6 +3,5 @@
 # custom header (on web-01 and web-02)
 apt-get update
 apt-get install -y nginx
-server_hostname=$(hostname)
 sed -i '51i add_header X-Served-By "'"$server_hostname"'";' /etc/nginx/sites-available/default
 service nginx start
