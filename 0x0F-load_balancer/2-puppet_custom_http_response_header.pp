@@ -8,7 +8,7 @@ file_line { 'install':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'location / {',
-  line   => 'add_header X-Served-By $server_hostname;',
+  line   => 'add_header X-Served-By 405012-web-01;',
 }
 
 service { 'nginx':
