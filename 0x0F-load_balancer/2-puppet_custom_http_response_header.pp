@@ -1,20 +1,8 @@
 # Automate the task of creating a custom HTTP header response, but with Puppet
-
-$server_hostname = $facts['networking']['fqdn']
-
-package { 'nginx':
-  ensure => 'installed',
+exec { 'command':
+  command  => 'apt-get -y update; apt-get -y install nginx;
+  sudo sed -i "51i add_header X-Served-By $HOSTNAME;" /etc/nginx/sites-available/default;
+  service nginx restart',
+  provider => shell,
 }
 
-file_line { 'add custom http header':
-  ensure => 'present',
-  path   => '/etc/nginx/sites-available/default',
-  after  => 'location / {',
-  line   => "add_header X-Served-By ${server_hostname};",
-  notify => Service['nginx'],
-}
-
-service { 'nginx':
-  ensure  => 'running',
-  require => Package['nginx'],
-}
