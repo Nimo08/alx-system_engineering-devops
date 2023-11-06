@@ -13,5 +13,4 @@ backend myservers
   server 405012-web-01 100.25.144.173:80
   server 405012-web-02 54.160.65.154:80
 EOL
-update-rc.d haproxy defaults
 service haproxy start
