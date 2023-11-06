@@ -10,7 +10,7 @@ file_line { 'add custom http header':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'location / {',
-  line   => 'add_header X-Served-By $server_hostname;',
+  line   => 'add_header X-Served-By "$server_hostname";',
 }
 
 service { 'nginx':
