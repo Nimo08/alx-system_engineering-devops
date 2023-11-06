@@ -4,7 +4,7 @@ package { 'nginx':
   ensure => 'installed',
 }
 
-file_line { 'install':
+file_line { 'add custom http header':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'location / {',
