@@ -1,5 +1,7 @@
 # Automate the task of creating a custom HTTP header response, but with Puppet
 
+$server_hostname = $::hostname
+
 package { 'nginx':
   ensure => 'installed',
 }
