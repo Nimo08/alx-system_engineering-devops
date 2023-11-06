@@ -1,7 +1,20 @@
 # Automate the task of creating a custom HTTP header response, but with Puppet
 
-exec { 'add custom http header':
-  command => "echo 'add_header X-Served-By \{"$server_hostname\}";' >> /etc/nginx/sites-available/default",
-  require => exec { 'install nginx package' },
-  notify  => Service['nginx'],
+$server_hostname = $facts['networking']['fqdn']
+
+package { 'nginx':
+  ensure => 'installed',
+}
+
+file_line { 'add custom http header':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => 'location / {',
+  line   => "add_header X-Served-By ${server_hostname};",
+  notify => Service['nginx'],
+}
+
+service { 'nginx':
+  ensure  => 'running',
+  require => Package['nginx'],
 }
