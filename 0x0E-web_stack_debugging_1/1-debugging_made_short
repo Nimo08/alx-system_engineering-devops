@@ -2,3 +2,4 @@
 # Using what you did for task #0, make your fix short and sweet
 sed -i 'listen *:80' /etc/nginx/sites-available/default
 service nginx restart
+kill $(cat run/nginx.pid)
