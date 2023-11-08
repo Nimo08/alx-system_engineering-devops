@@ -4,7 +4,7 @@
 # Nginx must be running, and listening on port 80 of
 # all the server’s active IPv4 IPs
 # configures a server to the above requirements
-apt-get update
-apt-get install -y nginx
-sed -i '\\\tlisten 0:80;' /etc/nginx/sites-available/default
-service nginx restart
+sudo apt-get update
+sudo apt-get install -y nginx
+sudo sed -i '\\\tlisten 0:80;' /etc/nginx/sites-available/default
+sudo service nginx restart
