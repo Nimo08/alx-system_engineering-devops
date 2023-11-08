@@ -6,5 +6,6 @@
 # configures a server to the above requirements
 sudo apt-get update
 sudo apt-get install -y nginx
-sudo sed -i 'listen 0:80;' /etc/nginx/sites-available/defaultsudo nginx -t
+sudo sed -i 's/listen 80;/listen 0.0.0.0:80;/' /etc/nginx/sites-available/default
+sudo nginx -t
 sudo service nginx restart
