@@ -10,7 +10,7 @@ domain_func() {
                 echo "The subdomain $subdomain is a $type_record record and points to $destination"
         fi
 }
-if [ -z "$2" ]; then
+if [ "$#" -eq 2 ]; then
 	domain="$1"
 	for subdomain in www lb-01 web-01 web-02; do
 		domain_func "$domain" "$subdomain"
