@@ -1,22 +1,16 @@
 #!/usr/bin/env bash
 # Display information about subdomains
 domain_func() {
-	domain="$1"
-	subdomain="$2"
-	record=$(dig "$subdomain.$domain" | grep -A1 'ANSWER SECTION:')
-        if [ -n "$record" ]; then
-                type_record=$(echo "$record" | awk '{print $4}')
-                destination=$(echo "$record" | awk '{print $5}')
-                echo "The subdomain $subdomain is a $type_record record and points to $destination"
-        fi
+	record=$(dig "$2"."$1" | grep -A1 'ANSWER SECTION:')
+	echo "$2 $record" | awk -F' ' '{print "The subdomain "$1" is a "$2" record and points to "$3""}'
+
 }
+
 if [ "$#" -eq 2 ]; then
-	domain="$1"
-	for subdomain in www lb-01 web-01 web-02; do
-		domain_func "$domain" "$subdomain"
-	done
+	domain_func "$1" "$2"
 else
-	domain="$1"
-	subdomain="$2"
-	domain_func "$domain" "$subdomain"
+        subdomains=("www" "lb-01" "web-01" "web-02")
+        for subdomain in "${subdomains[@]}"; do
+	domain_func "$1" "$subdomain"
+        done
 fi
