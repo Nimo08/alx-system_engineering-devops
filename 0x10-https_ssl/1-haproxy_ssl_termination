@@ -37,7 +37,7 @@ frontend myfrontend
   default_backend myservers
 
 frontend www-https
-  bind *:443 ssl crt /etc/letsencrypt/live/www.mohamednimo.tech/fullchain.pem
+  bind *:443 ssl crt /etc/haproxy/certs/www.mohamednimo.pem
   mode http
   option forwardfor
   default_backend www-backend
