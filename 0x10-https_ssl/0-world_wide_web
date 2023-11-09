@@ -7,7 +7,7 @@ domain_func() {
         if [ -n "$record" ]; then
                 type_record=$(echo "$record" | awk '{print $4}')
                 destination=$(echo "$record" | awk '{print $5}')
-                echo "The subdomain $subdomain is a "$type_record" record and points to "$destination""
+                echo "The subdomain "$subdomain" is a "$type_record" record and points to "$destination""
         fi
 }
 if [ -z "$2" ]; then
