@@ -3,20 +3,20 @@
 domain_func() {
 	domain="$1"
 	subdomain="$2"
-	record=$(dig "$subdomain.$domain" +short)
+	record=$(dig "$subdomain.$domain" | grep 'IN\s')
 	if [ -n "$record" ]; then
-                        type_record=$(echo "$record" | awk '{print $4}')
-                        destination=$(echo "$record" | awk '{print $5}')
-                        echo "The subdomain $subdomain is a $type_record record and points to $destination"
-                fi
+        	type_record=$(echo "$record" | awk '{print $4}')
+        	destination=$(echo "$record" | awk '{print $5}')
+        	echo "The subdomain $subdomain is a $type_record record and points to $destination"
+	fi
 }
-if [ -z "$subdomain" ]; then
+if [ -z "$2" ]; then
 	domain="$1"
 	for subdomain in www lb-01 web-01 web-02; do
-		domain_func "$subdomain" "$domain"
+		domain_func "$domain" "$subdomain"
 	done
 else
 	domain="$1"
 	subdomain="$2"
-	domain_func "$subdomain" "$domain"
+	domain_func "$domain" "$subdomain"
 fi
