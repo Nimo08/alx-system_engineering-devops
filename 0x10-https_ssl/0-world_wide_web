@@ -3,7 +3,7 @@
 domain_func() {
 	domain="$1"
 	subdomain="$2"
-	 record=$(dig "$subdomain.$domain" | grep -A1 'ANSWER SECTION:')
+	record=$(dig "$subdomain.$domain" | grep -A1 'ANSWER SECTION:')
         if [ -n "$record" ]; then
                 type_record=$(echo "$record" | awk '{print $4}')
                 destination=$(echo "$record" | awk '{print $5}')
