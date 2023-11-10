@@ -34,18 +34,11 @@ defaults
 	errorfile 504 /etc/haproxy/errors/504.http
 frontend myfrontend
   bind *:80
-  default_backend myservers
-
-frontend www-https
   bind *:443 ssl crt /etc/haproxy/certs/www.mohamednimo.pem
   mode http
   option forwardfor
-  default_backend www-backend
+  default_backend myservers
 
-backend myservers
-  balance roundrobin
-  server 405012-web-01 100.25.144.173:80
-  server 405012-web-02 54.160.65.154:80
 
 backend www-backend
   balance roundrobin
