@@ -7,4 +7,4 @@ chmod 644 /etc/nginx/nginx.conf
 # avoid possible conflicts
 pkill apache2
 # run with user nginx
-sudo -u nginx service nginx start
+sudo -u nginx service nginx restart
