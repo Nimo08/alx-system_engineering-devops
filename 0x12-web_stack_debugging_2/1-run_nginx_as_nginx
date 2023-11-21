@@ -2,4 +2,5 @@
 # Fix this container so that Nginx is running as the nginx user
 sed -i 's/user nginx;/user nginx;/' /etc/nginx/nginx.conf
 sed -i 's/listen       80;/listen       8080;/' /etc/nginx/sites-available/default
+chown -R nginx:nginx /var/lib/nginx
 sudo service nginx restart
