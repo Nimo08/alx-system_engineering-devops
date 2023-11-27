@@ -37,7 +37,7 @@ def todo_list(employee_id):
                 'user_id': user_id,
                 'username': username,
                 'total_tasks': len(todo),
-                'completed_tasks': completed_tasks,
+                'tasks': todo,
                 'user_info': user_info
                 }
     except requests.exceptions.RequestException as e:
@@ -45,7 +45,7 @@ def todo_list(employee_id):
         sys.exit(1)
 
 
-def export_csv(employee_id, tasks, user_info):
+def export_csv(employee_id, total_tasks, tasks, user_info):
     """
     """
     file = f"{employee_id}.csv"
@@ -69,8 +69,8 @@ if __name__ == "__main__":
     try:
         employee_id = int(sys.argv[1])
         todo_info = todo_list(employee_id)
-        export_csv(employee_id, todo_info['completed_tasks'],
-                   todo_info['user_info'])
+        export_csv(employee_id, todo_info['total_tasks'],
+                   todo_info['tasks'], todo_info['user_info'])
     except ValueError as e:
         print(e)
         sys.exit(1)
