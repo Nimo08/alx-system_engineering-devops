@@ -35,7 +35,7 @@ def todo_list(employee_id):
         print(f"Employee {employee_name} is done with tasks"
               f"({str(completed_task_num)}/{str(total_tasks)}):")
         for task in completed_tasks:
-            print(f"    {task['title']}")
+            print(f"\t {task['title']}")
     except requests.exceptions.RequestException as e:
         print(e)
         sys.exit(1)
