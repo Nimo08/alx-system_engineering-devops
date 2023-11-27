@@ -37,11 +37,30 @@ def todo_list(employee_id):
                 'user_id': user_id,
                 'username': username,
                 'total_tasks': len(todo),
-                'completed_tasks': completed_tasks
+                'completed_tasks': completed_tasks,
+                'user_info': user_info
                 }
     except requests.exceptions.RequestException as e:
         print(e)
         sys.exit(1)
+
+
+def export_csv(employee_id, tasks, user_info):
+    """
+    """
+    file = f"{employee_id}.csv"
+    with open(file, 'w', newline='') as csvfile:
+        fieldnames = ['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS',
+                      'TASK_TITLE']
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames,
+                                quoting=csv.QUOTE_ALL)
+        for task in tasks:
+            writer.writerow({
+                'USER_ID': employee_id,
+                'USERNAME': user_info['username'],
+                'TASK_COMPLETED_STATUS': task['completed'],
+                'TASK_TITLE': task['title']
+                })
 
 
 if __name__ == "__main__":
@@ -49,16 +68,9 @@ if __name__ == "__main__":
         sys.exit(1)
     try:
         employee_id = int(sys.argv[1])
-        todo_list_info = todo_list(employee_id)
-        with open(f'{employee_id}.csv', 'w', newline='') as csvfile:
-            csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-            for task in todo_list_info['completed_tasks']:
-                csv_writer.writerow([
-                        str(todo_list_info['user_id']),
-                        todo_list_info['username'],
-                        str(task['completed']),
-                        task['title']
-                    ])
+        todo_info = todo_list(employee_id)
+        export_csv(employee_id, todo_info['completed_tasks'],
+                   todo_info['user_info'])
     except ValueError as e:
         print(e)
         sys.exit(1)
