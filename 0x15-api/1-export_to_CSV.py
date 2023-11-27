@@ -36,6 +36,7 @@ def todo_list(employee_id):
         return {
                 'user_id': user_id,
                 'username': username,
+                'total_tasks': len(todo),
                 'completed_tasks': completed_tasks
                 }
     except requests.exceptions.RequestException as e:
@@ -51,8 +52,6 @@ if __name__ == "__main__":
         todo_list_info = todo_list(employee_id)
         with open(f'{employee_id}.csv', 'w', newline='') as csvfile:
             csv_writer = csv.writer(csvfile, quoting=csv.QUOTE_ALL)
-            csv_writer.writerow(["USER_ID", "USERNAME",
-                                "TASK_COMPLETED_STATUS", "TASK_TITLE"])
             for task in todo_list_info['completed_tasks']:
                 csv_writer.writerow([
                         str(todo_list_info['user_id']),
