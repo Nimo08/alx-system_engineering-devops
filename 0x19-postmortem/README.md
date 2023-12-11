@@ -1,5 +1,7 @@
 # THE ARCHIVE CRASH INCIDENT REPORT 
 	
+![image](postmortem-img.png)
+
 ## Issue summary
 At 11:27 AM, user reports to the Archive’s social media support handle stated that requests from users’ attempts at logging into the archive resulted in a 500 error response message. The issue affected all the users logged out of the archive portal at the time and therefore restricted access to the archive.
 
