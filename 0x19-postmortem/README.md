@@ -3,7 +3,7 @@
 ## Issue summary
 At 11:27 AM, user reports to the Archive’s social media support handle stated that requests from users’ attempts at logging into the library resulted in a 500 error response message. The issue affected all the users logged out of the library portal at the time and therefore restricted access to the library services.
 
-##Timelines (UTC + 3:00)
+## Timelines (UTC+3)
 - 11:20 AM: An update to a configuration file is pushed
 - 11:27 AM: User reports of 500 error message flow in
 - 12:34 PM: Pagers alerted the incident response team
