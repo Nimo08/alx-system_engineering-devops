@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 # script to reload Gunicorn in a graceful way
 
-kill -HUP "$(ps -C gunicorn fch -o pid | head -n 1)"
+gunicorn_pid=$(pgrep gunicorn)
+
+if [ -n "$gunicorn_pid" ]; then
+    kill -HUP "$gunicorn_pid"
+fi
